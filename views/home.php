@@ -2,11 +2,9 @@
     <div class="main-container">
         <div class="filters">
             <p>Hi i'm filters
-                <?php
-                // echo "<pre>";
-                // var_dump($data['filters']);
-                ?>
             </p>
+            <?php echo "<pre>";
+            print_r($data['filters']); ?>
         </div>
         <div class="products">
             <?php

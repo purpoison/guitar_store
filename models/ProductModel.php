@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . "../../functioins/ConnectToDB.php";
 class ProductModel extends ConnectToDB
 {
     public function getProducts($num)

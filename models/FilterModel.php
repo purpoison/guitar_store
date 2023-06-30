@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__ . "../../functioins/ConnectToDB.php";
-
 class FilterModel extends ConnectToDB
 {
 
@@ -17,13 +15,10 @@ class FilterModel extends ConnectToDB
         ];
         $filters = [];
         foreach ($filters_list as $filter_name => $filter_column) {
-            $name = [];
             $data = $this->getFilter($filter_name, $filter_column);
             foreach ($data as $item) {
-                $name[] = $item->$filter_column;
+                $filters[$filter_column][$item->id] = $item->$filter_column;
             }
-            array_push($filters, $name);
-            // array_push($filters, $this->getFilter($filter_name, $filter_column));
         }
         return $filters;
     }
@@ -32,7 +27,7 @@ class FilterModel extends ConnectToDB
     {
         $dbh = $this->connection();
         try {
-            $sth = $dbh->query("SELECT {$column} FROM {$filterName}");
+            $sth = $dbh->query("SELECT id, {$column} FROM {$filterName}");
 
             $result = $sth->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $e) {

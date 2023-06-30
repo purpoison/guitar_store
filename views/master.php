@@ -45,8 +45,6 @@
     </header>
     <?php
     require_once VIEWS_PATH . "/{$page}.php";
-    echo "<pre>";
-    var_dump($data['filters']);
 
     ?>
 

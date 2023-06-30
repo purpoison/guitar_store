@@ -8,7 +8,6 @@ class ProductController
         $this->render("home", [
             'products' => $model->getProducts(5),
             'filters' => $filter->generateFilters()
-            // 'filters' => $filter->getFilter('filter_brands', 'brand'),
         ]);
     }
 
