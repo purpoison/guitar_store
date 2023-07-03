@@ -16,8 +16,6 @@ class ProductController
         if (isset($_POST)) {
             $modelSearch = new SearchingModel();
             $searchData = $modelSearch->getSearchingProducts($_POST);
-            // echo "<pre>";
-            // print_r($searchData);
             $model = new ProductModel();
             $filter = new FilterModel();
             $this->render("search", [
@@ -29,9 +27,11 @@ class ProductController
 
     public function new()
     {
-        $products = ['hello' => 'message'];
+        $newProductsModel = new SpecificProductsModel();
+        $newIds = $newProductsModel->getProductsId('new');
+        $model = new ProductModel();
         $this->render("new", [
-            'products' => $products
+            'products' => $model->getProducts(0, $newIds)
         ]);
     }
 

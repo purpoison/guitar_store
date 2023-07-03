@@ -2,13 +2,13 @@
     <?php if ($data['products']) : ?>
         <div class="active-filters">
             <h3><i> Active filters:</i></h3>
-            <span class="filter-amt">chosen <?= count($data['products']) ?> products:</span>
+            <span class="filter-amt"><?= count($data['products']) ?> matches found</span>
             <?php foreach ($_POST as $filter) :
                 foreach ($filter as $key => $value) : ?>
                     <span class="active-filters-item"><?= toUpperCase($key) ?></span>
                 <?php endforeach ?>
             <?php endforeach ?>
-            <br>
+            <a href="?page=home" class="btn">Clear all filters</a>
         </div>
         <div class="main-container">
             <div class="filters">
