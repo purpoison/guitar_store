@@ -15,6 +15,8 @@ class ProductModel extends ConnectToDB
                 LEFT JOIN reviews ON reviews.product_id = pr.id 
                 GROUP BY pr.id";
                 $sth = $dbh->query($sql);
+            } else if ($filters == 'empty') {
+                return false;
             } else {
                 $sql = "SELECT pr.name, pr.price, 
                 (SELECT path FROM product_imgs WHERE product_imgs.product_id = pr.id LIMIT 1) AS img_path, (SELECT COUNT(*) FROM reviews WHERE reviews.product_id = pr.id) AS review_amt,
@@ -34,7 +36,7 @@ class ProductModel extends ConnectToDB
             }
             $result = $sth->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
-            die("Error! Code: {$e->getCode()}. Message: {$e->getMessage()}" . PHP_EOL);
+            die("Error! Code: {$e->getCode()}. Message: {$e->getMessage()}" . PHP_EOL . $sql);
             exit;
         }
         return $result;

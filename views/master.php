@@ -37,11 +37,6 @@
                 </div>
             </div>
         </div>
-        <div class="header__poster">
-            <img src="../img/promo.png" alt="promo">
-        </div>
-
-
     </header>
     <?php
     require_once VIEWS_PATH . "/{$page}.php";

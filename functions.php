@@ -42,3 +42,24 @@ function generateProductCard($data)
     }
     return $div;
 }
+
+function generateFilters($data, $action)
+{
+    $div = "<form action='{$action}?page=search' method='POST'>";
+    foreach ($data as $filter_name => $filter) {
+        $name = toUpperCase($filter_name);
+        $div .= "<div class='filter-wrap'>
+            <h3 class='filter__title'>{$name}</h3>
+            <div class='filter__content'>";
+        foreach ($filter as $id => $value) {
+            $div .= "<ul class='filter__content-list'>
+                <li> <input type='checkbox' name='{$filter_name}_id[{$value}]' id='{$value}-{$id}' value={$id}>
+                    <label for='{$value}-{$id}'>{$value}</label>
+                </li>
+            </ul>";
+        }
+        $div .= "</div><button type='submit' class='btn filter-btn'>Show</button> </div>";
+    }
+    $div .= "</form>";
+    return $div;
+}

@@ -25,13 +25,18 @@ class SearchingModel extends ConnectToDB
 
             $result = $sth->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
-            die("Error! Code: {$e->getCode()}. Message: {$e->getMessage()}" . PHP_EOL);
+            die("Error! Code: {$e->getCode()}. Message: {$e->getMessage()}" . PHP_EOL . "searching model " . $sql);
             exit;
         }
         $idArray = [];
         foreach ($result as $item) {
             $idArray[] = $item->product_id;
         }
-        return $idArray;
+        if (empty($idArray)) {
+            $idArray = 'empty';
+            return $idArray;
+        } else {
+            return $idArray;
+        }
     }
 }

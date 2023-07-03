@@ -1,7 +1,9 @@
+<div class="header__poster">
+    <img src="../img/promo.png" alt="promo">
+</div>
 <div class="container home">
     <div class="main-container">
         <div class="filters">
-            <!-- . "?page=search" -->
             <form action="<?= $_SERVER['SCRIPT_NAME'] . "?page=search" ?>" method="POST">
                 <?php foreach ($data['filters'] as $filter_name => $filter) : ?>
                     <div class="filter-wrap">
