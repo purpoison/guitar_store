@@ -7,6 +7,6 @@ define("MAIN_MENU", [
     'home' => 'Home',
     'new' => 'New arrivals',
     'used' => 'Used',
-    'about' => 'About us',
+    // 'about' => 'About us',
     'contacts' => 'Contacts'
 ]);

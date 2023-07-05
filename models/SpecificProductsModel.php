@@ -5,13 +5,16 @@ class SpecificProductsModel extends ConnectToDB
     {
         $dbh = $this->connection();
         try {
-            $sth = $dbh->query("SELECT id FROM products WHERE 'condition' = '{$condition}'");
-
+            $sth = $dbh->query("SELECT id FROM products WHERE products.condition = '{$condition}'");
             $result = $sth->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
             die("Error! Code: {$e->getCode()}. Message: {$e->getMessage()}" . PHP_EOL);
             exit;
         }
-        return $result;
+        $idArray = [];
+        foreach ($result as $item) {
+            $idArray[] = $item->id;
+        }
+        return $idArray;
     }
 }

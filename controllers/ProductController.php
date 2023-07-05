@@ -27,8 +27,8 @@ class ProductController
 
     public function new()
     {
-        $newProductsModel = new SpecificProductsModel();
-        $newIds = $newProductsModel->getProductsId('new');
+        $productsModel = new SpecificProductsModel();
+        $newIds = $productsModel->getProductsId('new');
         $model = new ProductModel();
         $this->render("new", [
             'products' => $model->getProducts(0, $newIds)
@@ -37,10 +37,11 @@ class ProductController
 
     public function used()
     {
-
-        $products = ['hello' => 'message'];
+        $productsModel = new SpecificProductsModel();
+        $usedIds = $productsModel->getProductsId('pre owned');
+        $model = new ProductModel();
         $this->render("used", [
-            'products' => $products
+            'products' => $model->getProducts(0, $usedIds)
         ]);
     }
 
