@@ -49,6 +49,8 @@
             © Guitar world 2021 - <?php echo date('Y'); ?>
         </div>
     </footer>
+    <div class="go-to-top">
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="../js/script.js"></script>
 </body>
