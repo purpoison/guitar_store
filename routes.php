@@ -11,6 +11,7 @@ $routes = [
     'about' => 'ProductController:about',
     'contacts' => 'ProductController:contacts',
     'search' => 'ProductController:search',
+    'product' => 'ProductController:product',
     '404' =>  'ProductController:status404'
 ];
 

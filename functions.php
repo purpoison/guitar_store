@@ -16,31 +16,36 @@ function generateProductCard($data)
             <p class='card__price'>$ {$value->price}</p>
             <div class='card__rating'>
                 <ul class='rating__stars'>";
-
-        if (!is_null($value->rating)) {
-            $rating = round($value->rating);
-            for ($i = 1; $i <= $rating; $i++) {
-                $div .= "<li class='full-star'>★</li>";
-            }
-            if ((5 - $rating) > 0) {
-                for ($i = 1; $i <= (5 - $rating); $i++) {
-                    $div .= "<li class='empty-star'>★</li>";
-                }
-            }
-        } else {
-            for ($i = 1; $i <= 5; $i++) {
-                $div .= "<li class='empty-star'>★</li>";
-            }
-        }
-
+        $div .= generateRating($value->rating);
         $div .= "</ul>
             </div>
             <div class='card__buttons'>
-                <a href='#' class='btn btn-add-to-bag'>Add to bag</a>
+                <a href='?page=product&product_id={$value->id}' class='btn btn-add-to-bag'>Add to bag</a>
             </div>
         </div>";
     }
     return $div;
+}
+
+function generateRating($avg)
+{
+    $rez = '';
+    if (!is_null($avg)) {
+        $rating = round($avg);
+        for ($i = 1; $i <= $rating; $i++) {
+            $rez .= "<li class='full-star'>★</li>";
+        }
+        if ((5 - $rating) > 0) {
+            for ($i = 1; $i <= (5 - $rating); $i++) {
+                $rez .= "<li class='empty-star'>★</li>";
+            }
+        }
+    } else {
+        for ($i = 1; $i <= 5; $i++) {
+            $rez .= "<li class='empty-star'>★</li>";
+        }
+    }
+    return $rez;
 }
 
 function generateFilters($data, $action)

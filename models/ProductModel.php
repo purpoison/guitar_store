@@ -7,7 +7,7 @@ class ProductModel extends ConnectToDB
         $dbh = $this->connection();
         try {
             if (!$filters) {
-                $sql = "SELECT pr.name, pr.price, 
+                $sql = "SELECT pr.id, pr.name, pr.price, 
                 (SELECT path FROM product_imgs WHERE product_imgs.product_id = pr.id LIMIT 1) AS img_path, (SELECT COUNT(*) FROM reviews WHERE reviews.product_id = pr.id) AS review_amt,
                 (SELECT AVG(rating) FROM reviews WHERE reviews.product_id = pr.id) AS rating
                 FROM products AS pr 
@@ -18,7 +18,7 @@ class ProductModel extends ConnectToDB
             } else if ($filters == 'empty') {
                 return false;
             } else {
-                $sql = "SELECT pr.name, pr.price, 
+                $sql = "SELECT pr.id, pr.name, pr.price, 
                 (SELECT path FROM product_imgs WHERE product_imgs.product_id = pr.id LIMIT 1) AS img_path, (SELECT COUNT(*) FROM reviews WHERE reviews.product_id = pr.id) AS review_amt,
                 (SELECT AVG(rating) FROM reviews WHERE reviews.product_id = pr.id) AS rating
                 FROM products AS pr 
