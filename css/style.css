@@ -2,6 +2,7 @@
     --primary:#9f0909;
     --secondary: #d66666;
     --grey: #d4d4d4;
+    --white: #fff;
 }
 *{
     margin: 0;
@@ -83,12 +84,12 @@ header{
     text-decoration: none;
     padding: 1.5rem 0;
     white-space: nowrap;
-    color: #fff;
+    color: var(--white);
     font-weight: 600;
     text-transform: uppercase;
 }
 .main-menu ul a:hover{
-    color: #fff;
+    color: var(--white);
     font-weight: 600;
     background-color: var(--secondary);
 }
@@ -97,7 +98,7 @@ header{
     gap: 2rem;
 }
 .actions a{
-    color: #fff;
+    color: var(--white);
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -150,7 +151,7 @@ header{
     -webkit-box-shadow: 0px 0px 6px 3px rgba(0,0,0,0.28);
     -moz-box-shadow: 0px 0px 6px 3px rgba(0,0,0,0.28);
     box-shadow: 0px 0px 6px 3px rgba(0,0,0,0.28);
-    background-color: #fff;
+    background-color: var(--white);
 }
 .card__img{
     width: 100%;
@@ -226,7 +227,7 @@ header{
 footer{
     text-align: center;
     background-color: var(--primary);
-    color: #fff;
+    color: var(--white);
     padding: 2rem 0 4rem;
 }
 
@@ -434,7 +435,7 @@ footer{
 }
 .financing{
     background-color: var(--primary);
-    color: #fff;
+    color: var(--white);
     padding: 0.5rem;
 }
 .important{
@@ -511,8 +512,8 @@ font-weight: 700;
 
 .go-to-top {
     background: url(../img/up-arrow.png) center no-repeat;
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
     background-size: contain;
     display: flex;
     align-items: center;
@@ -542,7 +543,6 @@ font-weight: 700;
     filter: contrast(10%);
 }
 
-/* анімація для плавної появи кнопки "вгору" і меню на мобільних пристроях */
 @keyframes opasApp {
     0% {
         display: none;

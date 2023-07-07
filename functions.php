@@ -10,7 +10,7 @@ function generateProductCard($data)
 {
     $div = '';
     foreach ($data as $value) {
-        $div .= "<div class='product__card'>
+        $div .= "<div class='product__card' data-href='?page=product&product_id={$value->id}'>
             <img src='{$value->img_path}' class='card__img' alt='{$value->name}'>
             <h5 class='card__title'>{$value->name}</h5>
             <p class='card__price'>$ {$value->price}</p>
@@ -20,7 +20,7 @@ function generateProductCard($data)
         $div .= "</ul>
             </div>
             <div class='card__buttons'>
-                <a href='?page=product&product_id={$value->id}' class='btn btn-add-to-bag'>Add to bag</a>
+                <a href='#' class='btn btn-add-to-bag'>Add to bag</a>
             </div>
         </div>";
     }

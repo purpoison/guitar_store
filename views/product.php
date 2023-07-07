@@ -28,7 +28,7 @@
                         <?php
                         if ($data['product_reviews'] !== 'empty' && count($data['product_reviews']) !== 1) {
                             echo count($data['product_reviews']) . ' reviews';
-                        } else if (count($data['product_reviews']) == 1) {
+                        } else if ($data['product_reviews'] !== 'empty' && count($data['product_reviews']) == 1) {
                             echo '1 review';
                         } else {
                             echo '0 reviews';
@@ -83,10 +83,10 @@
     </div>
     <div id="reviews">
         <h3 class="review__title"><?php if ($data['product_reviews'] !== 'empty' && count($data['product_reviews']) !== 1) : ?>Reviewed by <?= count($data['product_reviews']) ?> customers:
-        <?php elseif (count($data['product_reviews']) == 1) : ?>
+        <?php elseif ($data['product_reviews'] !== 'empty' && count($data['product_reviews']) == 1) : ?>
             Reviewed by 1 customer:
         <?php else : ?>
-            Not reviewed yet
+            No reviews yet :(
         <?php endif ?>
         </h3>
         <?php if ($data['product_reviews'] !== 'empty') :

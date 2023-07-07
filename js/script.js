@@ -6,17 +6,19 @@ const swiper = new Swiper('.product-slider', {
 });
 
 
-// перехід на сторінку про товар
+// go to product detales
 const products = document.querySelectorAll('.product__card');
 products.forEach(product => {
   product.addEventListener('click', e => {
-    const myButton = e.currentTarget.querySelector('.btn-add-to-bag');
-    const myHref = myButton.getAttribute('href');
-    window.location.href = myHref;
+    const myHref = e.currentTarget.dataset.href;
+    if(!e.target.classList.contains('btn')){
+      window.location.href = myHref;
+      
+    }
   })
 })
 
-// кнопка вгору
+// up button
 
 const goToTop = document.querySelector('.go-to-top');
 

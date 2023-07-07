@@ -14,9 +14,6 @@ class ProductController
     public function search()
     {
         if (isset($_POST)) {
-            // echo "<pre>";
-            // print_r($_POST);
-            // exit;
             $modelSearch = new SearchingModel();
             $searchData = $modelSearch->getSearchingProducts($_POST);
             $model = new ProductModel();
