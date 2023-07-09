@@ -68,3 +68,23 @@ function generateFilters($data, $action)
     $div .= "</form>";
     return $div;
 }
+
+function createPaginationBtns($total_page)
+{
+    $div = "<div class='pagination-wrap'>";
+    if (isset($_GET['subPage']) && intval($_GET['subPage']) > 1) {
+        $page = intval($_GET['subPage']) - 1;
+        $div .= "<a href='index.php?subPage={$page}' class='pagination-btn'>Prev</a>";
+    }
+
+    for ($btn = 1; $btn <= $total_page; $btn++) {
+        $div .= "<a href='?subPage={$btn}' class='pagination-btn' id='{$btn}'>$btn</a>";
+    }
+
+    if (isset($_GET['subPage']) && intval($_GET['subPage']) < $total_page) {
+        $page = intval($_GET['subPage']) + 1;
+        $div .= "<a href='index.php?subPage={$page}' class='pagination-btn'>Next</a>";
+    }
+    $div .= "</div>";
+    return $div;
+}

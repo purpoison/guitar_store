@@ -559,3 +559,17 @@ font-weight: 700;
         opacity: 1;
     }
 }
+
+.pagination-wrap{
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+.pagination-btn{
+    color: var(--primary);
+    text-decoration: none;
+}
+.pagination-btn:hover{
+    text-decoration: underline;
+}

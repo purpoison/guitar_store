@@ -3,24 +3,30 @@ class ProductController
 {
     public function index()
     {
+        $offset = isset($_GET['subPage']) ? (intval($_GET['subPage']) - 1) * LIMIT : 0;
         $model = new ProductModel();
         $filter = new FilterModel();
+        $total_page = $model->totalPages(LIMIT);
         $this->render("home", [
-            'products' => $model->getProducts(5),
-            'filters' => $filter->generateFilters()
+            'products' => $model->getProducts(LIMIT, $offset),
+            'filters' => $filter->generateFilters(),
+            'pages' => $total_page
         ]);
     }
 
     public function search()
     {
         if (isset($_POST)) {
+            $offset = isset($_GET['subPage']) ? (intval($_GET['subPage']) - 1) * LIMIT : 0;
             $modelSearch = new SearchingModel();
             $searchData = $modelSearch->getSearchingProducts($_POST);
             $model = new ProductModel();
             $filter = new FilterModel();
+            $total_page = $model->totalPages(LIMIT);
             $this->render("search", [
-                'products' => $model->getProducts(0, $searchData),
-                'filters' => $filter->generateFilters()
+                'products' => $model->getProducts(LIMIT, $offset, $searchData),
+                'filters' => $filter->generateFilters(),
+                'pages' => $total_page
             ]);
         }
     }
@@ -30,8 +36,10 @@ class ProductController
         $productsModel = new SpecificProductsModel();
         $newIds = $productsModel->getProductsId('new');
         $model = new ProductModel();
+        $total_page = $model->totalPages(LIMIT);
         $this->render("new", [
-            'products' => $model->getProducts(0, $newIds)
+            'products' => $model->getProducts(0, 0, $newIds),
+            'pages' => $total_page
         ]);
     }
 
@@ -41,7 +49,7 @@ class ProductController
         $usedIds = $productsModel->getProductsId('pre owned');
         $model = new ProductModel();
         $this->render("used", [
-            'products' => $model->getProducts(0, $usedIds)
+            'products' => $model->getProducts(0, 0, $usedIds),
         ]);
     }
 

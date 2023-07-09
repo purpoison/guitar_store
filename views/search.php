@@ -14,9 +14,13 @@
             <div class="filters">
                 <?php echo generateFilters($data['filters'], $_SERVER['SCRIPT_NAME']); ?>
             </div>
-            <div class="products">
-                <?php echo generateProductCard($data['products']); ?>
+            <div>
+                <div class="products">
+                    <?php echo generateProductCard($data['products']); ?>
+                </div>
+                <?php if ($data['pages'] != 1) echo createPaginationBtns($data['pages']) ?>
             </div>
+
         </div>
     <?php else : ?>
         <div class="not-available">

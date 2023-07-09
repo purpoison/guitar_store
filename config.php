@@ -10,3 +10,4 @@ define("MAIN_MENU", [
     // 'about' => 'About us',
     'contacts' => 'Contacts'
 ]);
+define("LIMIT", 20);
