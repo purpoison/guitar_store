@@ -746,11 +746,18 @@ font-weight: 700;
     border-color: var(--secondary);
 }
 
-.no-user{
-    height: calc(100vh - 220px);
-}
-.no-user h1{
+.message-wrap{
     text-align: center;
-    padding-top: 5rem;
+    height: calc(100vh - 330px);
+}
+.message-wrap h1{
+    margin: 4rem 0;
     font-size: 40px;
+}
+.red{
+    color: var(--primary);
+}
+.message-wrap .btn{
+    padding: 1rem 3rem;
+    font-size: 25px;
 }

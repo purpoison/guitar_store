@@ -73,29 +73,34 @@
                     <label for="user_email">Email</label>
                     <input type="email" name="user_email" id="user_email" required>
                     <label for="user_password">Password</label>
-                    <input type="password" name="user_password" id="user_password">
+                    <input type="password" name="user_password" id="user_password" maxlength="10">
                     <button type="submit" class="popup__btn btn" name="login">Sign In</button>
                     <span>or</span>
                     <a href="#" class="create-acc">Create account</a>
                 </div>
             </form>
-            <form action="$_SERVER['SCRIPT_NAME']" method="POST" class="popup__form sign-up-form hidden">
+            <form action=<?= $_SERVER['SCRIPT_NAME'] . '?page=signup' ?> method="POST" class="popup__form sign-up-form hidden">
                 <div class="popup__close">
                 </div>
                 <div class="flex">
                     <h3 class="title">Registration</h3>
-                    <label for="email">Email</label>
-                    <input type="email" name="new_user_email" required>
 
-                    <label for="password">Password</label>
-                    <input type="password" name="new_user_password">
-
-                    <label for="repeatpasword">Password confirmation</label>
-                    <input type="password" name="repeatpasword" id="repeatpasword" required>
+                    <label for="new_user_name">Full Name</label>
+                    <input type="text" name="new_user_name" id="new_user_name" required>
+                    <label for="new_user_phone">Phone</label>
+                    <!-- pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  -->
+                    <input type="tel" name="new_user_phone" id="new_user_phone" placeholder="+1..." required maxlength="16">
+                    <label for="new_user_address">Adress</label>
+                    <input type="text" name="new_user_address" id="new_user_address" required>
+                    <label for="new_user_email">Email</label>
+                    <input type="email" name="user_email" required id="new_user_email">
+                    <label for="new_user_password">Password</label>
+                    <input type="password" name="user_password" maxlength="10" id="new_user_password" required>
+                    <!-- <label for="repeatpassword">Password confirmation</label>
+                    <input type="password" name="repeatpassword" id="repeatpassword" maxlength="10" required> -->
                     <button type="submit" class="popup__btn btn" name="signup">Sign Up</button>
                 </div>
             </form>
-
         </div>
     </div>
 

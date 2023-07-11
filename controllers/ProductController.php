@@ -67,7 +67,7 @@ class ProductController
 
     public function login()
     {
-        if (isset($_POST['login']) || isset($_POST['signup'])) {
+        if (isset($_POST['login'])) {
             $model = new RegistrationModel();
             $signIn = $model->logIn($_POST, 'AND');
             $this->render("login", [
@@ -77,7 +77,18 @@ class ProductController
     }
     public function signup()
     {
-        $this->render("signup");
+        if (isset($_POST['signup'])) {
+            $model = new RegistrationModel();
+            $isAlredyExist = $model->logIn($_POST, 'OR');
+            if (empty($isAlredyExist)) {
+                // var_dump($_POST);
+                $model->signUp($_POST);
+            }
+
+            $this->render("signup", [
+                'isexist' => $isAlredyExist
+            ]);
+        }
     }
 
     public function logout()

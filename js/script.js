@@ -67,45 +67,47 @@ function showMore(elem, btn){
 
 if(filterWrap) showMore(filterWrap, showFiltersBtn);
 
-const signInBtn = document.querySelector('.sign-in');
+const signInBtn = document.querySelectorAll('.sign-in');
 const body = document.querySelector('body');
 const signUPForm = document.querySelector('.sign-up-form');
 const signInForm = document.querySelector('.sign-in-form');
 const createAccBtn = document.querySelector('.create-acc');
 
-signInBtn.addEventListener('click', e => {
-  e.preventDefault();
-  let popup = document.querySelector('.popup');
-  body.style.overflow = 'hidden';
-  popup.classList.add('popup__open');
-  let closePopup = document.querySelectorAll('.popup__close');
-  closePopup.forEach(close => {
-    close.addEventListener('click', c => {
-      popup.classList.remove('popup__open');
-        body.style.overflow = 'auto';
-        const inputs = document.querySelectorAll('.popup input');
-        inputs.forEach(input => {
-            input.value = '';
-        })
-        signUPForm.classList.add('hidden');
-        signInForm.classList.remove('hidden');
-    })
-  })
-
-
-  document.addEventListener('click', el => {
-      if (el.target.classList.contains('popup__body')) {
-          popup.classList.remove('popup__open');
+signInBtn.forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    let popup = document.querySelector('.popup');
+    body.style.overflow = 'hidden';
+    popup.classList.add('popup__open');
+    let closePopup = document.querySelectorAll('.popup__close');
+    closePopup.forEach(close => {
+      close.addEventListener('click', c => {
+        popup.classList.remove('popup__open');
           body.style.overflow = 'auto';
-          signUPForm.classList.add('hidden');
-          signInForm.classList.remove('hidden');
           const inputs = document.querySelectorAll('.popup input');
           inputs.forEach(input => {
               input.value = '';
           })
-      }
-  });
+          signUPForm.classList.add('hidden');
+          signInForm.classList.remove('hidden');
+      })
+    })
+    
+    document.addEventListener('click', el => {
+        if (el.target.classList.contains('popup__body')) {
+            popup.classList.remove('popup__open');
+            body.style.overflow = 'auto';
+            signUPForm.classList.add('hidden');
+            signInForm.classList.remove('hidden');
+            const inputs = document.querySelectorAll('.popup input');
+            inputs.forEach(input => {
+                input.value = '';
+            })
+        }
+    });
+  })
 })
+
 
 //sign up
 
