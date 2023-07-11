@@ -20,9 +20,6 @@ class RegistrationModel extends ConnectToDB
 
     public function signUp($data)
     {
-        // echo "<pre>";
-        // var_dump($data);
-        // exit;
         $dbh = $this->connection();
         try {
             $sql = "INSERT INTO customers (name, email, phone, address, password) VALUES (:name, :email, :phone, :address, :password);";

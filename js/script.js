@@ -5,6 +5,7 @@ const swiper = new Swiper('.product-slider', {
       },
 });
 
+const body = document.querySelector('body');
 
 // go to product detales
 const products = document.querySelectorAll('.product__card');
@@ -67,19 +68,43 @@ function showMore(elem, btn){
 
 if(filterWrap) showMore(filterWrap, showFiltersBtn);
 
+function initializePopup(popupSelector, buttonSelector, closeSelector) {
+  let close = document.querySelector(closeSelector);
+  let popup = document.querySelector(popupSelector);
+  let btn = document.querySelector(buttonSelector);
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    body.style.overflow = 'hidden';
+    popup.classList.add('popup__open');
+  });
+
+  close.addEventListener('click', c => {
+    popup.classList.remove('popup__open');
+      body.style.overflow = 'auto';
+  });
+
+  document.addEventListener('click', el => {
+    if (el.target.classList.contains('popup__body')) {
+        popup.classList.remove('popup__open');
+        body.style.overflow = 'auto';
+      }
+  });
+};
+
+initializePopup('.bag', '.bag-btn', '.bag .popup__close');
+
 const signInBtn = document.querySelectorAll('.sign-in');
-const body = document.querySelector('body');
 const signUPForm = document.querySelector('.sign-up-form');
 const signInForm = document.querySelector('.sign-in-form');
 const createAccBtn = document.querySelector('.create-acc');
+const closePopup = document.querySelectorAll('.registration .popup__close');
+const popup = document.querySelector('.registration');
 
 signInBtn.forEach(btn => {
   btn.addEventListener('click', e => {
     e.preventDefault();
-    let popup = document.querySelector('.popup');
     body.style.overflow = 'hidden';
     popup.classList.add('popup__open');
-    let closePopup = document.querySelectorAll('.popup__close');
     closePopup.forEach(close => {
       close.addEventListener('click', c => {
         popup.classList.remove('popup__open');
@@ -92,7 +117,7 @@ signInBtn.forEach(btn => {
           signInForm.classList.remove('hidden');
       })
     })
-    
+
     document.addEventListener('click', el => {
         if (el.target.classList.contains('popup__body')) {
             popup.classList.remove('popup__open');
@@ -116,3 +141,13 @@ createAccBtn.addEventListener('click', e => {
   signUPForm.classList.remove('hidden');
   signInForm.classList.add('hidden');
 })
+
+const addTobagBtns = document.querySelectorAll('.btn-add-to-bag');
+console.log(addTobagBtns);
+if(addTobagBtns){
+  addTobagBtns.forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+    })
+  })
+}

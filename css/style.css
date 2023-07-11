@@ -112,7 +112,7 @@ header{
     width: 20px;
 }
 
-.bag{
+.bag-btn{
     position: relative;
 }
 .bag-counter{
@@ -501,8 +501,8 @@ font-weight: 700;
     margin: 2rem 0;
     font-size: 30px;
 }
-.buy-btn{
-    font-size: 30px;
+.review .btn-add-to-bag{
+    font-size: 30px !important;
 }
 .review-date{
     align-self: flex-end;
@@ -760,4 +760,47 @@ font-weight: 700;
 .message-wrap .btn{
     padding: 1rem 3rem;
     font-size: 25px;
+}
+
+/* .bag{
+ visibility: visible;
+ opacity: 1;
+} */
+.bag .popup__body{
+    text-align: left;
+}
+.bag-wrap{
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 3rem 2rem;
+    position: relative;
+    height: 500px;
+    overflow: auto;
+    min-width: 400px;
+}
+.bag__content{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+.bag__img{
+    max-width: 70px;
+}
+.bag .popup__close{
+    top: 20px;
+}
+.bag__card{
+    border: 1px solid var(--grey);
+    padding: 1rem;
+}
+
+.bag__total{
+    font-size: 20px;
+    font-weight: 600;
+    text-align: right;
+}
+.checkout{
+    padding: 1rem 2rem;
 }

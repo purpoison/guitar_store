@@ -3,11 +3,6 @@ class ProductController
 {
     public function index()
     {
-        // if (isset($_POST['login']) || isset($_POST['signup'])) {
-        //     echo "<pre>";
-        //     var_dump($_POST);
-        //     exit;
-        // }
         $offset = isset($_GET['subPage']) ? (intval($_GET['subPage']) - 1) * LIMIT : 0;
         $model = new ProductModel();
         $filter = new FilterModel();
@@ -81,10 +76,8 @@ class ProductController
             $model = new RegistrationModel();
             $isAlredyExist = $model->logIn($_POST, 'OR');
             if (empty($isAlredyExist)) {
-                // var_dump($_POST);
                 $model->signUp($_POST);
             }
-
             $this->render("signup", [
                 'isexist' => $isAlredyExist
             ]);

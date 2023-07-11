@@ -44,7 +44,7 @@
                         }
                         ?>
 
-                        <a href="#" class="bag"><img src="../img/bag.png" alt="bag">Bag<span class="bag-counter">0</span></a>
+                        <a href="#" class="bag-btn"><img src="../img/bag.png" alt="bag">Bag<span class="bag-counter">0</span></a>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
     <div class="go-to-top">
     </div>
 
-    <div class="popup">
+    <div class="popup registration">
         <div class="popup__body">
             <form action=<?= $_SERVER['SCRIPT_NAME'] . '?page=login' ?> method="POST" class="popup__form sign-in-form" id="signup">
                 <div class="popup__close">
@@ -101,6 +101,46 @@
                     <button type="submit" class="popup__btn btn" name="signup">Sign Up</button>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="popup bag">
+        <div class="popup__body">
+            <div class="bag-wrap">
+                <div class="popup__close">
+                </div>
+                <div class="bag__card">
+                    <div class="bag__content">
+                        <div class="bag__img">
+                            <img src="https://media.guitarcenter.com/is/image/MMGS7/L72272000003000-00-600x600.jpg" alt="...">
+                        </div>
+                        <div class="bag__description">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as.</p>
+                                <p class="card-text red">$ 4500</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bag__card">
+                    <div class="bag__content">
+                        <div class="bag__img">
+                            <img src="https://media.guitarcenter.com/is/image/MMGS7/L72272000003000-00-600x600.jpg" alt="...">
+                        </div>
+                        <div class="bag__description">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as.</p>
+                                <p class="card-text red">$ 4500</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bag__total">total: $ 2222</div>
+                <a href="#" class="checkout btn">Checkout</a>
+            </div>
+
         </div>
     </div>
 
