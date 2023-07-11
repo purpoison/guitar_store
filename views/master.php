@@ -13,6 +13,9 @@
 </head>
 
 <body>
+    <?php
+    session_start();
+    ?>
     <header>
         <div class="header">
             <div class="container">
@@ -32,7 +35,15 @@
                         </ul>
                     </nav>
                     <div class="actions">
-                        <a href="#"> <img src="../img/user.png" alt="user">Sign In</a>
+                        <?php
+                        if (isset($_SESSION['login'])) {
+                            echo "<a href='?page=logout' class='log-out'> <img src='../img/exit.png' alt='log out'>Log out</a>
+                            ";
+                        } else {
+                            echo " <a href='#' class='sign-in'> <img src='../img/user.png' alt='user'>Sign In</a>";
+                        }
+                        ?>
+
                         <a href="#" class="bag"><img src="../img/bag.png" alt="bag">Bag<span class="bag-counter">0</span></a>
                     </div>
                 </div>
@@ -51,6 +62,43 @@
     </footer>
     <div class="go-to-top">
     </div>
+
+    <div class="popup">
+        <div class="popup__body">
+            <form action=<?= $_SERVER['SCRIPT_NAME'] . '?page=login' ?> method="POST" class="popup__form sign-in-form" id="signup">
+                <div class="popup__close">
+                </div>
+                <div class="flex">
+                    <h3 class="title">Log In</h3>
+                    <label for="user_email">Email</label>
+                    <input type="email" name="user_email" id="user_email" required>
+                    <label for="user_password">Password</label>
+                    <input type="password" name="user_password" id="user_password">
+                    <button type="submit" class="popup__btn btn" name="login">Sign In</button>
+                    <span>or</span>
+                    <a href="#" class="create-acc">Create account</a>
+                </div>
+            </form>
+            <form action="$_SERVER['SCRIPT_NAME']" method="POST" class="popup__form sign-up-form hidden">
+                <div class="popup__close">
+                </div>
+                <div class="flex">
+                    <h3 class="title">Registration</h3>
+                    <label for="email">Email</label>
+                    <input type="email" name="new_user_email" required>
+
+                    <label for="password">Password</label>
+                    <input type="password" name="new_user_password">
+
+                    <label for="repeatpasword">Password confirmation</label>
+                    <input type="password" name="repeatpasword" id="repeatpasword" required>
+                    <button type="submit" class="popup__btn btn" name="signup">Sign Up</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="../js/script.js"></script>
 </body>

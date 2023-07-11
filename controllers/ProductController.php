@@ -3,6 +3,11 @@ class ProductController
 {
     public function index()
     {
+        // if (isset($_POST['login']) || isset($_POST['signup'])) {
+        //     echo "<pre>";
+        //     var_dump($_POST);
+        //     exit;
+        // }
         $offset = isset($_GET['subPage']) ? (intval($_GET['subPage']) - 1) * LIMIT : 0;
         $model = new ProductModel();
         $filter = new FilterModel();
@@ -17,16 +22,13 @@ class ProductController
     public function search()
     {
         if (isset($_POST)) {
-            $offset = isset($_GET['subPage']) ? (intval($_GET['subPage']) - 1) * LIMIT : 0;
             $modelSearch = new SearchingModel();
             $searchData = $modelSearch->getSearchingProducts($_POST);
             $model = new ProductModel();
             $filter = new FilterModel();
-            $total_page = $model->totalPages(LIMIT);
             $this->render("search", [
-                'products' => $model->getProducts(LIMIT, $offset, $searchData),
+                'products' => $model->getProducts(0, 0, $searchData),
                 'filters' => $filter->generateFilters(),
-                'pages' => $total_page
             ]);
         }
     }
@@ -63,6 +65,25 @@ class ProductController
         $this->render("contacts");
     }
 
+    public function login()
+    {
+        if (isset($_POST['login']) || isset($_POST['signup'])) {
+            $model = new RegistrationModel();
+            $signIn = $model->logIn($_POST, 'AND');
+            $this->render("login", [
+                'userInfo' => $signIn
+            ]);
+        }
+    }
+    public function signup()
+    {
+        $this->render("signup");
+    }
+
+    public function logout()
+    {
+        $this->render("logout");
+    }
     public function status404()
     {
         $this->render("404");

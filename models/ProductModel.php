@@ -31,11 +31,9 @@ class ProductModel extends ConnectToDB
             if ($limit != 0) {
                 $sth->bindValue(':offset', $offset, PDO::PARAM_INT);
                 $sth->bindValue(':limit', $limit, PDO::PARAM_INT);
-                // var_dump($offset, $limit, $sth);
-                $sth->execute();
-            } else {
-                $sth->execute();
             }
+
+            $sth->execute();
             $result = $sth->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
             die("Error! Code: {$e->getCode()}. Message: {$e->getMessage()}" . PHP_EOL . $sql);

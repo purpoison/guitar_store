@@ -37,3 +37,80 @@ window.addEventListener('scroll', e => {
 
   }
 });
+
+// page btn
+
+let urlString = document.location.search;
+let pageId = urlString.split('=').pop();
+let current_btn = document.getElementById(pageId);
+if(current_btn){
+    current_btn.classList.add('active-page');
+}
+
+// filter block
+
+const filterWrap = document.querySelector('.filters form');
+const showFiltersBtn = document.querySelector('.show-filters');
+
+function showMore(elem, btn){
+  if(elem.offsetHeight > 1000){
+    elem.style.height = "650px";
+    elem.style.overflow = "hidden";
+    btn.classList.remove('hidden');
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      elem.style.height = "auto";
+      btn.classList.add('hidden');
+    })
+  }
+}
+
+if(filterWrap) showMore(filterWrap, showFiltersBtn);
+
+const signInBtn = document.querySelector('.sign-in');
+const body = document.querySelector('body');
+const signUPForm = document.querySelector('.sign-up-form');
+const signInForm = document.querySelector('.sign-in-form');
+const createAccBtn = document.querySelector('.create-acc');
+
+signInBtn.addEventListener('click', e => {
+  e.preventDefault();
+  let popup = document.querySelector('.popup');
+  body.style.overflow = 'hidden';
+  popup.classList.add('popup__open');
+  let closePopup = document.querySelectorAll('.popup__close');
+  closePopup.forEach(close => {
+    close.addEventListener('click', c => {
+      popup.classList.remove('popup__open');
+        body.style.overflow = 'auto';
+        const inputs = document.querySelectorAll('.popup input');
+        inputs.forEach(input => {
+            input.value = '';
+        })
+        signUPForm.classList.add('hidden');
+        signInForm.classList.remove('hidden');
+    })
+  })
+
+
+  document.addEventListener('click', el => {
+      if (el.target.classList.contains('popup__body')) {
+          popup.classList.remove('popup__open');
+          body.style.overflow = 'auto';
+          signUPForm.classList.add('hidden');
+          signInForm.classList.remove('hidden');
+          const inputs = document.querySelectorAll('.popup input');
+          inputs.forEach(input => {
+              input.value = '';
+          })
+      }
+  });
+})
+
+//sign up
+
+createAccBtn.addEventListener('click', e => {
+  e.preventDefault();
+  signUPForm.classList.remove('hidden');
+  signInForm.classList.add('hidden');
+})

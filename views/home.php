@@ -2,11 +2,10 @@
     <img src="../img/promo.png" alt="promo">
 </div>
 <div class="container home">
-    <!-- <?php var_dump(count($data['products'])) ?> -->
     <div class="main-container">
-
         <div class="filters">
             <?php echo generateFilters($data['filters'], $_SERVER['SCRIPT_NAME']); ?>
+            <a href="#" class="show-filters hidden">See all filters</a>
         </div>
         <div>
             <div class="products">
