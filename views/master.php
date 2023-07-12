@@ -108,39 +108,22 @@
             <div class="bag-wrap">
                 <div class="popup__close">
                 </div>
-                <div class="bag__card">
-                    <div class="bag__content">
-                        <div class="bag__img">
-                            <img src="https://media.guitarcenter.com/is/image/MMGS7/L72272000003000-00-600x600.jpg" alt="...">
-                        </div>
-                        <div class="bag__description">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as.</p>
-                                <p class="card-text red">$ 4500</p>
-                            </div>
-                        </div>
+                <div class="bagcards-wrap">
+                    <div class="card-message">
+                        <h1 class="red">Your Bag Is Empty</h1>
+                        <div class="card-message-img"><img src="../img/shopping-cart.png" alt="cart"></div>
                     </div>
                 </div>
-                <div class="bag__card">
-                    <div class="bag__content">
-                        <div class="bag__img">
-                            <img src="https://media.guitarcenter.com/is/image/MMGS7/L72272000003000-00-600x600.jpg" alt="...">
-                        </div>
-                        <div class="bag__description">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as.</p>
-                                <p class="card-text red">$ 4500</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="bag__footer hidden">
+                    <p class="bag__total">total: <span class="red">$</span><span class="red total-price">0</span></p>
+                    <?php if (isset($_SESSION['login'])) {
+                        echo "<a href='#' class='checkout btn'>Checkout</a>";
+                    } else {
+                        echo "<p>To make a purchase, please <span class='green'>Sign In</span> first</p><a href='#' class='sign-in btn'>Sign In</a>";
+                    }
+                    ?>
                 </div>
-
-                <div class="bag__total">total: $ 2222</div>
-                <a href="#" class="checkout btn">Checkout</a>
             </div>
-
         </div>
     </div>
 

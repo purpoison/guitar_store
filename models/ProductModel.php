@@ -11,10 +11,15 @@ class ProductModel extends ConnectToDB
         LEFT JOIN product_imgs AS primg ON primg.product_id = pr.id 
         LEFT JOIN reviews ON reviews.product_id = pr.id";
         try {
-            if (!$filters) {
+            if (!$filters && $limit != 0) {
                 $sql .= " GROUP BY pr.id LIMIT :offset, :limit";
             } else if ($filters == 'empty') {
                 return false;
+            } else if (!$filters && $limit == 0) {
+                $sql .= " GROUP BY pr.id";
+                $sth = $dbh->query($sql, PDO::FETCH_ASSOC);
+                $result = $sth->fetchAll();
+                return $result;
             } else {
                 $sql .= " WHERE pr.id IN (";
                 foreach ($filters as $id) {
@@ -56,5 +61,18 @@ class ProductModel extends ConnectToDB
         }
 
         return $total_page;
+    }
+    public function store($data, $filePath)
+    {
+        $myJson = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        // echo "<pre>";
+        // var_dump($myJson);
+        // exit;
+        if (file_put_contents($filePath, $myJson)) {
+            // echo 'Data saved to JSON file successfully.';
+        } else {
+            // echo $filePath . PHP_EOL;
+            // echo 'Error saving data to JSON file.';
+        }
     }
 }

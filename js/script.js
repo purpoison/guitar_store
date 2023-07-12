@@ -39,7 +39,7 @@ window.addEventListener('scroll', e => {
   }
 });
 
-// page btn
+// page btn for pagination
 
 let urlString = document.location.search;
 let pageId = urlString.split('=').pop();
@@ -90,7 +90,7 @@ function initializePopup(popupSelector, buttonSelector, closeSelector) {
       }
   });
 };
-
+const mainBag = document.querySelector('.bag');
 initializePopup('.bag', '.bag-btn', '.bag .popup__close');
 
 const signInBtn = document.querySelectorAll('.sign-in');
@@ -102,6 +102,7 @@ const popup = document.querySelector('.registration');
 
 signInBtn.forEach(btn => {
   btn.addEventListener('click', e => {
+    mainBag.classList.remove('popup__open');
     e.preventDefault();
     body.style.overflow = 'hidden';
     popup.classList.add('popup__open');
@@ -143,11 +144,60 @@ createAccBtn.addEventListener('click', e => {
 })
 
 const addTobagBtns = document.querySelectorAll('.btn-add-to-bag');
-console.log(addTobagBtns);
+
+
+//create a product list array
+
+
+  
+// Access and use the JavaScript object
+// console.log(jsonArray);
+
+
+//add to cart
+
+const bagWrap = document.querySelector('.bagcards-wrap')
+const bagfooter = document.querySelector('.bag__footer');
+const cardMessage = document.querySelector('.card-message');
+const totalAmount = document.querySelector('.total-price');
+const bagCounter = document.querySelector('.bag-counter');
+
 if(addTobagBtns){
   addTobagBtns.forEach(btn => {
     btn.addEventListener('click', e => {
       e.preventDefault();
+      let value = e.currentTarget.dataset.productid;
+      bagCounter.textContent = Number(bagCounter.textContent)+1;
+      fetch('../data/data.json')
+      .then(response => response.json())
+      .then(data => {
+       let elem = createbagCard(data[value]);
+       bagWrap.append(elem);
+        totalAmount.textContent = Number(totalAmount.textContent) + Number(data[value]['price']);
+      })
+      .catch(error => {
+        console.error('Error reading JSON file:', error);
+      });
+      bagfooter.classList.remove('hidden');
+      cardMessage.classList.add('hidden');
     })
   })
+}
+
+function createbagCard(data){
+  let div = document.createElement('div');
+  div.classList.add('bag__card');
+  div.innerHTML = `
+    <div class='bag__content' data-productid='${data['id']}'>
+        <div class='bag__img'>
+            <img src='${data['img_path']}' alt='${data['name']}'>
+        </div>
+        <div class='bag__description'>
+            <div class='card-body'>
+                <h5 class='card-title'>${data['name']}</h5>
+                <p class='card-text red'>$ ${data['price']}</p>
+            </div>
+        </div>
+    </div>`;
+return div;
 }

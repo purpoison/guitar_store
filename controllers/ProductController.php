@@ -3,10 +3,17 @@ class ProductController
 {
     public function index()
     {
+
         $offset = isset($_GET['subPage']) ? (intval($_GET['subPage']) - 1) * LIMIT : 0;
         $model = new ProductModel();
         $filter = new FilterModel();
         $total_page = $model->totalPages(LIMIT);
+        $myArray = $model->getProducts(0, 0);
+        // echo ("<pre>");
+        // var_dump($myArray);
+        // exit;
+        $path = dirname(__DIR__) . '/data/data.json';
+        $model->store($myArray, $path);
         $this->render("home", [
             'products' => $model->getProducts(LIMIT, $offset),
             'filters' => $filter->generateFilters(),

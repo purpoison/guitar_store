@@ -14,5 +14,4 @@
             <?php if ($data['pages'] != 1) echo createPaginationBtns($data['pages']) ?>
         </div>
     </div>
-
 </div>

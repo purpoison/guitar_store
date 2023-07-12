@@ -78,7 +78,7 @@
                     </tr>
                 </table>
             </div>
-            <a href="#" class="btn btn-add-to-bag" data-productId=<?= $data['product_info'] ?>>Add to bag</a>
+            <a href="#" class="btn btn-add-to-bag" data-productId=<?= $data['product_info']->id ?>>Add to bag</a>
         </div>
     </div>
     <div id="reviews">
