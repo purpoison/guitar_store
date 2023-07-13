@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guitar store</title>
+    <link rel="icon" type="image/x-icon" href="../img/logo.ico">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -20,6 +22,11 @@
         <div class="header">
             <div class="container">
                 <div class="navbar">
+                    <div class="mobile-menu-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                     <a href="?page=home" class="logo"><img src="../img/logo.svg" alt="logo"></a>
                     <nav class="main-menu">
                         <ul>
@@ -28,7 +35,7 @@
                             foreach (MAIN_MENU as $route => $name) :
                             ?>
                                 <li>
-                                    <a href="?page=<?php echo $route ?>"> <?php echo $name ?></a>
+                                    <a href="?page=<?php echo $route ?>" class="menu__link"> <?php echo $name ?></a>
                                 </li>
                             <?php
                             endforeach; ?>
@@ -106,11 +113,18 @@
     <div class="popup bag">
         <div class="popup__body">
             <div class="bag-wrap">
+
+                <?php
+                if (isset($_SESSION['login'])) {
+                    echo "<h3 class='user-message'>Hello {$_SESSION['username']}
+                    </h3>";
+                }
+                ?>
                 <div class="popup__close">
                 </div>
                 <div class="bagcards-wrap">
                     <div class="card-message">
-                        <h1 class="red">Your Bag Is Empty</h1>
+                        <h3 class="red">Your Bag Is Empty</h3>
                         <div class="card-message-img"><img src="../img/shopping-cart.png" alt="cart"></div>
                     </div>
                 </div>

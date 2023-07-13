@@ -50,7 +50,7 @@ function generateRating($avg)
 
 function generateFilters($data, $action)
 {
-    $div = "<form action='{$action}?page=search' method='POST'>";
+    $div = "<form action='{$action}?page=search' method='POST' class='filters-form'>";
     foreach ($data as $filter_name => $filter) {
         $name = toUpperCase($filter_name);
         $div .= "<div class='filter-wrap'>

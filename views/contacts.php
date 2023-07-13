@@ -28,16 +28,16 @@
                 </div>
             </div>
 
-            <form class="contact-us">
+            <form class="contact-us" action="#">
                 <h3>Have any questions?</h3>
                 <p><i>Leave us your information and our sales manager will call you back</i></p>
                 <input type="text" placeholder="Name*" name="name">
-                <div>
+                <div class="contact-input-wrap">
                     <input type="email" placeholder="Email*" name="email" required>
                     <input type="tel" placeholder="Phone*" name="phone" required>
                 </div>
                 <textarea name="message" id="" rows="10" placeholder="Message..."></textarea>
-                <button class="btn">Send</button>
+                <button class="btn" type="submit" name="contactMe">Send</button>
             </form>
         </div>
         <div class="contacts-item contacts__map" style="width: 100%"><iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=700%20Paramus%20Park,%20Paramus,%20NJ%2007652+(Guitar%20World)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/distance-area-calculator.html">measure distance on map</a></iframe></div>

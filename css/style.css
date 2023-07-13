@@ -77,7 +77,7 @@ header{
 .main-menu ul li{
     flex: 1 1 auto;
 }
-.main-menu ul a{
+.main-menu .menu__link{
     display: inline-block;
     width: 100%;
     text-align: center;
@@ -88,7 +88,12 @@ header{
     font-weight: 600;
     text-transform: uppercase;
 }
-.main-menu ul a:hover{
+.main-menu .menu__link:hover{
+    color: var(--white);
+    font-weight: 600;
+    background-color: var(--secondary);
+}
+.menu__link.active__link{
     color: var(--white);
     font-weight: 600;
     background-color: var(--secondary);
@@ -210,10 +215,9 @@ header{
     color: var(--grey);
 }
 .card__title{
-    height: 50px;
-}
-.card__title{
+    min-height: 50px;
     font-size: 11px;
+
 }
 .card-message-img{
     max-width: 200px;
@@ -296,6 +300,7 @@ footer{
 .not-available{
     text-align: center;
     margin-bottom: 2rem;
+    height: calc(100vh - 300px);
 }
 .not-available h2{
     font-size: 60px;
@@ -316,7 +321,7 @@ footer{
     flex-wrap: wrap;
     justify-content: space-between;
 }
-.new .product__card{
+.new .product__card, .used .product__card{
     margin-bottom: 2rem;
 }
 .title{
@@ -336,6 +341,7 @@ footer{
 .contacts__text{
     display: flex;
     gap: 2rem;
+    flex-wrap: wrap;
     margin-bottom: 1rem;
 }
 .contacts__text .hours{
@@ -755,7 +761,8 @@ font-weight: 700;
     text-align: center;
     height: calc(100vh - 330px);
 }
-.message-wrap h1{
+
+.message-wrap h3{
     margin: 4rem 0;
     font-size: 40px;
 }
@@ -781,7 +788,7 @@ font-weight: 700;
     background-color: #fff;
     padding: 3rem 2rem;
     position: relative;
-    height: 500px;
+    max-height: 500px;
     overflow: auto;
     min-width: 400px;
 }
@@ -821,6 +828,7 @@ flex-direction: column;
 gap: 1rem;
 margin-bottom: 0;
 margin-top: auto;
+text-align: center;
 }
 
 .card-message{
@@ -828,15 +836,202 @@ margin-top: auto;
     text-align: center;
     height: 100%;
 }
-.card-message h1{
+.card-message h3{
     font-size: 30px;
+}
+.user-message{
+    text-align: center;
+    color: var(--secondary);
+}
+.bag-card-title{
+    text-decoration: none;
+    font-weight: 600;
+    color: #000;
+}
+.bag-card-title:hover{
+    color: var(--primary);
+}
 
+.filters-form{
+    height: 650px;
+    overflow: hidden;
+}
+
+.mobile-menu-btn{
+    display: none;
+    transition: 0.3s;
+}
+.mobile-menu-btn span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background: #fff;
+    margin: 5px 0px;
+    opacity: 0.8;
+    border-radius: 2px;
+    transition: 0.3s;
     position: relative;
 }
-/* .card-message::after{
-    content: '';
-    position: absolute;
-    height: 40px;
-    width: 40px;
-    background-image: url(../img/bag.png);
-} */
+
+.mobile-menu-btn.active {
+    left: 30%;
+    z-index: 1000;
+    top: 2rem;
+}
+
+.active span:nth-child(1) {
+    transform: rotate(45deg);
+    top: 8px;
+}
+
+.active span:nth-child(2) {
+    display: none;
+}
+
+.active span:nth-child(3) {
+    transform: rotate(-45deg);
+}
+.menu-open{
+    display: block !important;
+}
+
+
+
+@media (max-width:1200px) {
+    .card__title{
+        min-height: 80px;
+    }
+    .contacts__text div{
+        width: 100%;
+    }
+}
+
+
+@media (max-width:992px) {
+    .main-container{
+        display: block;
+    }
+    .filters{
+        margin-bottom: 2rem;
+    }
+    .filters-form{
+        height: 0;
+    }
+    .products{
+        justify-content: space-between;
+    }
+    .product__card{
+        flex: 0 1 31%;
+    }
+}
+
+
+@media (orientation: landscape) and (max-height: 500px) {
+    .popup__body form{
+        height: 80vh;
+        overflow: auto;
+    }
+    .menu-open {
+        width: 50%;
+        overflow: auto;
+        height: 100% !important;
+    }
+    .bag-wrap {
+        height: 300px;
+    }
+}
+
+@media (max-width:768px) {
+    header {
+        margin-top: 55px;
+    }
+    .product .flex-container{
+        display: block;
+    }
+    .flex-item{
+        width: auto;
+    }
+    .product__info{
+        margin-top: 2rem;
+    }
+    .product__card {
+        flex: 0 1 48%;
+    }
+    .logo{
+        display: none;
+    }
+    .navbar{
+        padding: 0.5rem 0;
+    }
+    .main-menu{
+        display: none;
+    }
+    .mobile-menu-btn {
+        display: block;
+    }
+    .menu-open{
+        position: fixed;
+        background-color: var(--primary);
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 50%;
+    }
+    .main-menu ul{
+        flex-direction: column;
+        padding-top: 57.5px;
+    }
+    .card__title{
+        font-size: 14px;
+    }
+    .contacts-item{
+        margin-bottom: 2rem;
+    }
+    .contacts__wrap{
+        display: block;
+    }
+}
+
+
+@media (max-width:500px) {
+    .product__name {
+        font-size: 20px;
+    }
+    .product__price {
+        font-size: 30px;
+    }
+    .review__title {
+        font-size: 25px;
+    }
+    .bag-wrap {
+        padding: 3rem 2rem 2rem;
+    }
+    .bag .popup__close {
+        right: 10px;
+    }
+
+    .new .flex-container,.used .flex-container{
+        display: block;
+    }
+    .products{
+        display: block;
+    }
+    .product__card{
+        margin-bottom: 2rem;
+    }
+    .popup__body {
+        min-height: auto;
+        height: 100vh;
+    }
+    .card__title {
+        min-height: auto;
+    }
+    .bag-wrap{
+        min-width: auto;
+        height: 420px;
+    }
+    .contact-input-wrap input{
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+}

@@ -19,6 +19,7 @@ products.forEach(product => {
   })
 })
 
+
 // up button
 
 const goToTop = document.querySelector('.go-to-top');
@@ -48,15 +49,24 @@ if(current_btn){
     current_btn.classList.add('active-page');
 }
 
+//menu active
+const menuBtns = document.querySelectorAll('.menu__link');
+menuBtns.forEach(el => {
+  let linkHref =   el.getAttribute('href');
+  if(linkHref == urlString){
+    el.classList.add('active__link');
+  }
+})
+
 // filter block
 
 const filterWrap = document.querySelector('.filters form');
 const showFiltersBtn = document.querySelector('.show-filters');
 
 function showMore(elem, btn){
-  if(elem.offsetHeight > 1000){
-    elem.style.height = "650px";
-    elem.style.overflow = "hidden";
+  // if(elem.offsetHeight > 1000){
+    // elem.style.height = "650px";
+    // elem.style.overflow = "hidden";
     btn.classList.remove('hidden');
     btn.addEventListener('click', e => {
       e.preventDefault();
@@ -64,7 +74,7 @@ function showMore(elem, btn){
       btn.classList.add('hidden');
     })
   }
-}
+// }
 
 if(filterWrap) showMore(filterWrap, showFiltersBtn);
 
@@ -146,14 +156,6 @@ createAccBtn.addEventListener('click', e => {
 const addTobagBtns = document.querySelectorAll('.btn-add-to-bag');
 
 
-//create a product list array
-
-
-  
-// Access and use the JavaScript object
-// console.log(jsonArray);
-
-
 //add to cart
 
 const bagWrap = document.querySelector('.bagcards-wrap')
@@ -171,8 +173,9 @@ if(addTobagBtns){
       fetch('../data/data.json')
       .then(response => response.json())
       .then(data => {
-       let elem = createbagCard(data[value]);
-       bagWrap.append(elem);
+       let bagCard = createbagCard(data[value]);
+
+       bagWrap.append(bagCard);
         totalAmount.textContent = Number(totalAmount.textContent) + Number(data[value]['price']);
       })
       .catch(error => {
@@ -194,10 +197,39 @@ function createbagCard(data){
         </div>
         <div class='bag__description'>
             <div class='card-body'>
-                <h5 class='card-title'>${data['name']}</h5>
+                <a href='?page=product&product_id=${data['id']}' class='bag-card-title'>${data['name']}</a>
                 <p class='card-text red'>$ ${data['price']}</p>
             </div>
         </div>
     </div>`;
 return div;
 }
+
+// mobile menu
+const mobileBtn = document.querySelector('.mobile-menu-btn');
+const mainMenu = document.querySelector('.main-menu');
+
+mobileBtn.addEventListener('click', e => {
+  mainMenu.classList.toggle('menu-open');
+  mobileBtn.classList.toggle('active');
+});
+
+// checkbox validation
+
+const filtersForm = document.querySelector('.filters-form');
+
+const filtersCheckboxes = document.querySelectorAll('.filter__content-list input[type="checkbox"]');
+
+filtersForm.addEventListener('submit', e => {
+  let isChecked = false;
+  for(let i = 0; i < filtersCheckboxes.length; i++){
+    if(filtersCheckboxes[i].checked){
+      isChecked = true;
+      break;
+    }
+  }
+  if (!isChecked) {
+    e.preventDefault();
+    alert('Please select at least one filter');
+  }
+}) 
