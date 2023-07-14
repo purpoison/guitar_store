@@ -1,3 +1,5 @@
+
+// product slider
 const swiper = new Swiper('.product-slider', {
     navigation: {
         nextEl: '.swiper-button-next',
@@ -21,7 +23,6 @@ products.forEach(product => {
 
 
 // up button
-
 const goToTop = document.querySelector('.go-to-top');
 
 goToTop.addEventListener('click', e => {
@@ -41,7 +42,6 @@ window.addEventListener('scroll', e => {
 });
 
 // page btn for pagination
-
 let urlString = document.location.search;
 let pageId = urlString.split('=').pop();
 let current_btn = document.getElementById(pageId);
@@ -59,7 +59,6 @@ menuBtns.forEach(el => {
 })
 
 // filter block
-
 const filterWrap = document.querySelector('.filters form');
 const showFiltersBtn = document.querySelector('.show-filters');
 
@@ -78,6 +77,8 @@ function showMore(elem, btn){
 
 if(filterWrap) showMore(filterWrap, showFiltersBtn);
 
+
+//popup init
 function initializePopup(popupSelector, buttonSelector, closeSelector) {
   let close = document.querySelector(closeSelector);
   let popup = document.querySelector(popupSelector);
@@ -100,6 +101,9 @@ function initializePopup(popupSelector, buttonSelector, closeSelector) {
       }
   });
 };
+
+
+// bag logic
 const mainBag = document.querySelector('.bag');
 initializePopup('.bag', '.bag-btn', '.bag .popup__close');
 
@@ -146,18 +150,17 @@ signInBtn.forEach(btn => {
 
 
 //sign up
-
 createAccBtn.addEventListener('click', e => {
   e.preventDefault();
   signUPForm.classList.remove('hidden');
   signInForm.classList.add('hidden');
 })
 
-const addTobagBtns = document.querySelectorAll('.btn-add-to-bag');
+
 
 
 //add to cart
-
+const addTobagBtns = document.querySelectorAll('.btn-add-to-bag');
 const bagWrap = document.querySelector('.bagcards-wrap')
 const bagfooter = document.querySelector('.bag__footer');
 const cardMessage = document.querySelector('.card-message');
@@ -215,27 +218,39 @@ mobileBtn.addEventListener('click', e => {
 });
 
 // checkbox validation
-
 const filtersForm = document.querySelector('.filters-form');
-
 const filtersCheckboxes = document.querySelectorAll('.filter__content-list input[type="checkbox"]');
 
 if(filtersForm){
-  filtersForm.addEventListener('submit', e => {
+  inputValidation(filtersCheckboxes, filtersForm, 'Please select at least one filter')
+}
+
+// radio validation
+const addReviewForm = document.querySelector('.add-review__form');
+const radioRating = document.querySelectorAll('.review-rating-radio input[type="radio"]');
+if(addReviewForm){
+  inputValidation(radioRating, addReviewForm, 'Please select a rating');
+}
+
+// validation function
+function inputValidation(inputs, form, text){
+  form.addEventListener('submit', e => {
     let isChecked = false;
-    for(let i = 0; i < filtersCheckboxes.length; i++){
-      if(filtersCheckboxes[i].checked){
+    for(let i = 0; i < inputs.length; i++){
+      if(inputs[i].checked){
         isChecked = true;
         break;
       }
     }
     if (!isChecked) {
       e.preventDefault();
-      alert('Please select at least one filter');
+      alert(text);
     }
   }) 
 }
 
+
+// add review appearance
 const addReviewBtn = document.querySelector('.write-review-btn');
 const reviewForm = document.querySelector('.add-review__form');
 if(addReviewBtn){
