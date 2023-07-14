@@ -8,7 +8,7 @@
         $_SESSION['login'] = true;
         $_SESSION['username'] = $data['userInfo'][0]->name;
         $_SESSION['userid'] = $data['userInfo'][0]->id;
-        var_dump($_SESSION);
+        // var_dump($_SESSION);
         header("location: {$_SERVER['SCRIPT_NAME']}");
     }
     ?>

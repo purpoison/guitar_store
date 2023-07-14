@@ -95,6 +95,15 @@ class ProductController
     {
         $this->render("logout");
     }
+    public function addreview()
+    {
+
+        if (isset($_POST['reviewSubmit'])) {
+            $model = new AddReviewModel();
+            $model->addReview($_POST);
+        }
+    }
+
     public function status404()
     {
         $this->render("404");

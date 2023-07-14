@@ -15,6 +15,7 @@ $routes = [
     'login' => 'ProductController:login',
     'logout' => 'ProductController:logout',
     'signup' => 'ProductController:signup',
+    'addreview' => 'ProductController:addreview',
     '404' =>  'ProductController:status404'
 ];
 

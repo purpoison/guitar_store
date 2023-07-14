@@ -74,7 +74,7 @@ function createPaginationBtns($total_page)
     $div = "<div class='pagination-wrap'>";
     if (isset($_GET['subPage']) && intval($_GET['subPage']) > 1) {
         $page = intval($_GET['subPage']) - 1;
-        $div .= "<a href='index.php?subPage={$page}' class='pagination-btn'>Prev</a>";
+        $div .= "<a href='index.php?subPage={$page}' class='pagination-btn prev'>Prev</a>";
     }
 
     for ($btn = 1; $btn <= $total_page; $btn++) {
@@ -83,7 +83,7 @@ function createPaginationBtns($total_page)
 
     if (isset($_GET['subPage']) && intval($_GET['subPage']) < $total_page) {
         $page = intval($_GET['subPage']) + 1;
-        $div .= "<a href='index.php?subPage={$page}' class='pagination-btn'>Next</a>";
+        $div .= "<a href='index.php?subPage={$page}' class='pagination-btn next'>Next</a>";
     }
     $div .= "</div>";
     return $div;

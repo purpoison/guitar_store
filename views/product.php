@@ -89,6 +89,35 @@
             No reviews yet :(
         <?php endif ?>
         </h3>
+        <div class="write-review-text-wrap">
+            <?php if (!isset($_SESSION['login'])) : ?>
+                <span class="add-review-text">To write your review, please sign in first</span>
+                <a href="#" class="btn sign-in">Sign In</a>
+            <?php else : ?>
+                <a href="#" class="btn write-review-btn">Write your review</a>
+            <?php endif ?>
+            <form action="<?= $_SERVER['SCRIPT_NAME'] . '?page=addreview' ?>" method="POST" class="add-review__form hidden">
+                <input type="hidden" value="<?= $_SESSION['userid'] ?>" name="customer_id">
+                <input type="hidden" value="<?= $data['product_info']->id ?>" name="product_id">
+                <label for="rating">Your Overall Rating:</label>
+                <div class="review-rating-radio">
+                    <label for="rating"> 1</label>
+                    <input type="radio" name="rating" value="1">
+                    <label for="rating"> 2</label>
+                    <input type="radio" name="rating" value="2">
+                    <label for="rating"> 3</label>
+                    <input type="radio" name="rating" value="3">
+                    <label for="rating"> 4</label>
+                    <input type="radio" name="rating" value="4">
+                    <label for="rating"> 5</label>
+                    <input type="radio" name="rating" value="5">
+                </div>
+                <input type="text" name='title' id="review-title" placeholder="Review title" required>
+                <textarea name="body" id="review-body" cols="30" rows="10" placeholder="Your review"></textarea>
+                <button type="submit" name="reviewSubmit" class="btn">Submit</button>
+            </form>
+        </div>
+
         <?php if ($data['product_reviews'] !== 'empty') :
             foreach ($data['product_reviews'] as $review) :
         ?>

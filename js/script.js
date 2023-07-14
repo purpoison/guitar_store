@@ -220,16 +220,29 @@ const filtersForm = document.querySelector('.filters-form');
 
 const filtersCheckboxes = document.querySelectorAll('.filter__content-list input[type="checkbox"]');
 
-filtersForm.addEventListener('submit', e => {
-  let isChecked = false;
-  for(let i = 0; i < filtersCheckboxes.length; i++){
-    if(filtersCheckboxes[i].checked){
-      isChecked = true;
-      break;
+if(filtersForm){
+  filtersForm.addEventListener('submit', e => {
+    let isChecked = false;
+    for(let i = 0; i < filtersCheckboxes.length; i++){
+      if(filtersCheckboxes[i].checked){
+        isChecked = true;
+        break;
+      }
     }
-  }
-  if (!isChecked) {
+    if (!isChecked) {
+      e.preventDefault();
+      alert('Please select at least one filter');
+    }
+  }) 
+}
+
+const addReviewBtn = document.querySelector('.write-review-btn');
+const reviewForm = document.querySelector('.add-review__form');
+if(addReviewBtn){
+  addReviewBtn.addEventListener('click', e => {
     e.preventDefault();
-    alert('Please select at least one filter');
-  }
-}) 
+    reviewForm.classList.remove('hidden');
+    reviewForm.style.marginTop = 0;
+    addReviewBtn.classList.add('hidden');
+  })
+}
