@@ -22,7 +22,7 @@ class ProductDetales extends ConnectToDB
     public function getProductReviews($id)
     {
         $dbh = $this->connection();
-        $sql = "SELECT r.*, c.name FROM reviews AS r JOIN customers AS c ON c.id = r.customer_id WHERE r.product_id = :id";
+        $sql = "SELECT r.*, c.name FROM reviews AS r JOIN customers AS c ON c.id = r.customer_id WHERE r.product_id = :id ORDER BY r.date DESC";
         $sth = $dbh->prepare($sql);
         $sth->bindValue(':id', $id, PDO::PARAM_INT);
         $sth->execute();

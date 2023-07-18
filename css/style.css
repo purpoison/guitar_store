@@ -911,7 +911,13 @@ text-align: center;
     padding: 0.5rem 1rem;
 }
 
-
+.bag-delete{
+    max-width: 30px;
+    cursor: pointer;
+}
+.bag-delete:hover img{
+    filter: brightness(50%);
+}
 
 
 

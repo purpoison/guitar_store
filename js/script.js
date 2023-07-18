@@ -63,9 +63,6 @@ const filterWrap = document.querySelector('.filters form');
 const showFiltersBtn = document.querySelector('.show-filters');
 
 function showMore(elem, btn){
-  // if(elem.offsetHeight > 1000){
-    // elem.style.height = "650px";
-    // elem.style.overflow = "hidden";
     btn.classList.remove('hidden');
     btn.addEventListener('click', e => {
       e.preventDefault();
@@ -73,7 +70,6 @@ function showMore(elem, btn){
       btn.classList.add('hidden');
     })
   }
-// }
 
 if(filterWrap) showMore(filterWrap, showFiltersBtn);
 
@@ -177,7 +173,6 @@ if(addTobagBtns){
       .then(response => response.json())
       .then(data => {
        let bagCard = createbagCard(data[value]);
-
        bagWrap.append(bagCard);
         totalAmount.textContent = Number(totalAmount.textContent) + Number(data[value]['price']);
       })
@@ -189,6 +184,30 @@ if(addTobagBtns){
     })
   })
 }
+
+// bag remove btn
+const bagbtn = document.querySelector('.bag-btn');
+bagbtn.addEventListener('click', e => {
+  const deleteBtn = document.querySelectorAll('.bag-delete');
+    if(deleteBtn){
+      let counter = deleteBtn.length;
+      deleteBtn.forEach(btn => {
+        btn.addEventListener('click', e => {
+          counter--;
+          e.preventDefault();
+          let parrent = e.currentTarget.parentElement.parentElement;
+          parrent.remove();
+          let price = e.currentTarget.dataset.price;
+          totalAmount.textContent = Number(totalAmount.textContent) - Number(price);
+          bagCounter.textContent = Number(bagCounter.textContent)-1;
+          if(!counter){
+            bagfooter.classList.add('hidden');
+            cardMessage.classList.remove('hidden');
+          }
+        });
+      });
+    }
+})
 
 function createbagCard(data){
   let div = document.createElement('div');
@@ -204,6 +223,7 @@ function createbagCard(data){
                 <p class='card-text red'>$ ${data['price']}</p>
             </div>
         </div>
+        <a href="#" class='bag-delete' data-price=${data['price']}><img src='../img/delete.png' alt='delete'></a>
     </div>`;
 return div;
 }

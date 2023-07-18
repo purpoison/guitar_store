@@ -3,16 +3,6 @@ class AddReviewModel extends ConnectToDB
 {
     public function addReview($data)
     {
-        // echo "<pre>";
-        // var_dump(
-        //     date('Y-m-d H:i:s'),
-        //     $data['title'],
-        //     $data['body'],
-        //     $data['rating'],
-        //     $data['product_id'],
-        //     $data['customer_id']
-        // );
-        // exit;
         $dbh = $this->connection();
         try {
             $sql = "INSERT INTO reviews (date, title, body, rating, product_id, customer_id) VALUES (:date, :title, :body, :rating, :product_id, :customer_id);";
@@ -34,5 +24,6 @@ class AddReviewModel extends ConnectToDB
     public function relocation($id)
     {
         header("location: {$_SERVER['SCRIPT_NAME']}?page=product&product_id={$id}");
+        exit;
     }
 }
