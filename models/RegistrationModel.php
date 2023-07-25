@@ -5,10 +5,18 @@ class RegistrationModel extends ConnectToDB
     {
         $dbh = $this->connection();
         try {
-            $sql = "SELECT * FROM customers WHERE email = :email {$operator} password = :password";
-            $sth = $dbh->prepare($sql);
-            $sth->bindValue(':email', $data['user_email'], PDO::PARAM_STR);
-            $sth->bindValue(':password', $data['user_password'], PDO::PARAM_STR);
+            if ($operator == 'AND') {
+                $sql = "SELECT * FROM customers WHERE email = :email {$operator} password = :password";
+                $sth = $dbh->prepare($sql);
+                $sth->bindValue(':email', $data['user_email'], PDO::PARAM_STR);
+                $sth->bindValue(':password', $data['user_password'], PDO::PARAM_STR);
+            } else {
+                $sql = "SELECT * FROM customers WHERE email = :email";
+                $sth = $dbh->prepare($sql);
+                $sth->bindValue(':email', $data['user_email'], PDO::PARAM_STR);
+            }
+
+
             $sth->execute();
             $result = $sth->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $e) {

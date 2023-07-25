@@ -1,5 +1,15 @@
+const bagCounter = document.querySelector('.bag-counter');
+const storedValues = localStorage.getItem("cart"); 
+window.onload = e => {
+  if(storedValues){
+    parsedValues = JSON.parse(storedValues);
+    bagCounter.textContent = parsedValues.length;
+  }
+};
+
 
 // product slider
+
 const swiper = new Swiper('.product-slider', {
     navigation: {
         nextEl: '.swiper-button-next',
@@ -154,40 +164,56 @@ createAccBtn.addEventListener('click', e => {
 
 
 
-
 //add to cart
 const addTobagBtns = document.querySelectorAll('.btn-add-to-bag');
 const bagWrap = document.querySelector('.bagcards-wrap')
 const bagfooter = document.querySelector('.bag__footer');
 const cardMessage = document.querySelector('.card-message');
 const totalAmount = document.querySelector('.total-price');
-const bagCounter = document.querySelector('.bag-counter');
+
 
 if(addTobagBtns){
   addTobagBtns.forEach(btn => {
     btn.addEventListener('click', e => {
       e.preventDefault();
-      let value = e.currentTarget.dataset.productid;
+      // let value = e.currentTarget.dataset.productid;   
       bagCounter.textContent = Number(bagCounter.textContent)+1;
-      fetch('../data/data.json')
-      .then(response => response.json())
-      .then(data => {
-       let bagCard = createbagCard(data[value]);
-       bagWrap.append(bagCard);
-        totalAmount.textContent = Number(totalAmount.textContent) + Number(data[value]['price']);
-      })
-      .catch(error => {
-        console.error('Error reading JSON file:', error);
-      });
-      bagfooter.classList.remove('hidden');
-      cardMessage.classList.add('hidden');
     })
   })
 }
 
-// bag remove btn
+
+// add to localstorage
+// localStorage.clear();
+function cartLSadd(value) {
+  const storedValues = localStorage.getItem("cart");
+  if (storedValues === null) {
+    localStorage.setItem("cart", JSON.stringify([value]));
+  } 
+  else {
+    const parsedValues = JSON.parse(storedValues);
+    parsedValues.push(value);
+    localStorage.setItem('cart', JSON.stringify(parsedValues));
+  }
+}
+
+// showbag
 const bagbtn = document.querySelector('.bag-btn');
 bagbtn.addEventListener('click', e => {
+  const itemsfromStorage = localStorage.getItem("cart");
+  const arrayFromLS = JSON.parse(itemsfromStorage);
+  if(arrayFromLS.length){
+    let total = 0;
+    arrayFromLS.forEach(value => {
+      let bagCard = createbagCard(value);
+      bagWrap.append(bagCard);
+      total+=Number(value['price']);
+    })
+    totalAmount.textContent = total;
+    bagfooter.classList.remove('hidden');
+    cardMessage.classList.add('hidden');
+  }
+  //delete from bag
   const deleteBtn = document.querySelectorAll('.bag-delete');
     if(deleteBtn){
       let counter = deleteBtn.length;
@@ -197,7 +223,17 @@ bagbtn.addEventListener('click', e => {
           e.preventDefault();
           let parrent = e.currentTarget.parentElement.parentElement;
           parrent.remove();
-          let price = e.currentTarget.dataset.price;
+
+          // delete from localstorage
+          let indextoDelete = e.currentTarget.dataset.localindex;
+          const storedValues = localStorage.getItem("cart");
+          const parsedValues = JSON.parse(storedValues);
+          const ToDelete = parsedValues.findIndex(item => item.id === Number(indextoDelete));
+          let price = parsedValues[ToDelete].price;
+          parsedValues.splice(ToDelete, 1);
+          localStorage.setItem('cart', JSON.stringify(parsedValues));
+
+          // let price = e.currentTarget.dataset.price;
           totalAmount.textContent = Number(totalAmount.textContent) - Number(price);
           bagCounter.textContent = Number(bagCounter.textContent)-1;
           if(!counter){
@@ -209,6 +245,7 @@ bagbtn.addEventListener('click', e => {
     }
 })
 
+//create product card for bag
 function createbagCard(data){
   let div = document.createElement('div');
   div.classList.add('bag__card');
@@ -223,7 +260,7 @@ function createbagCard(data){
                 <p class='card-text red'>$ ${data['price']}</p>
             </div>
         </div>
-        <a href="#" class='bag-delete' data-price=${data['price']}><img src='../img/delete.png' alt='delete'></a>
+        <a href="#" class='bag-delete' data-localIndex=${data['id']}><img src='../img/delete.png' alt='delete'></a>
     </div>`;
 return div;
 }

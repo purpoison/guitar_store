@@ -65,14 +65,7 @@ class ProductModel extends ConnectToDB
     public function store($data, $filePath)
     {
         $myJson = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        // echo "<pre>";
-        // var_dump($myJson);
-        // exit;
         if (file_put_contents($filePath, $myJson)) {
-            // echo 'Data saved to JSON file successfully.';
-        } else {
-            // echo $filePath . PHP_EOL;
-            // echo 'Error saving data to JSON file.';
         }
     }
 }

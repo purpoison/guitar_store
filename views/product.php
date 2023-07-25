@@ -1,5 +1,6 @@
 <div class="container product">
     <a href="?page=home" class="btn product-btn">Back to Home</a>
+
     <div class="flex-container">
         <div class="slider__wrap flex-item">
             <div class="swiper product-slider">
@@ -78,7 +79,9 @@
                     </tr>
                 </table>
             </div>
-            <a href="#" class="btn btn-add-to-bag" data-productId=<?= ($data['product_info']->id - 1) ?>>Add to bag</a>
+            <?php
+            $info = json_encode($data['product_info']); ?>
+            <a href="#" class="btn btn-add-to-bag" data-productId=<?= ($data['product_info']->id - 1) ?> onclick='cartLSadd(<?= $info ?>)'>Add to bag</a>
         </div>
     </div>
     <div id="reviews">

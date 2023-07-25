@@ -4,8 +4,10 @@ class ProductDetales extends ConnectToDB
     public function getProductDetales($id)
     {
         $dbh = $this->connection();
-        $sql = "SELECT pr.*, (SELECT AVG(rating) FROM reviews WHERE reviews.product_id = pr.id) AS rating 
+        $sql = "SELECT pr.*, (SELECT AVG(rating) FROM reviews WHERE reviews.product_id = pr.id) AS rating,
+        (SELECT path FROM product_imgs WHERE product_imgs.product_id = pr.id LIMIT 1) AS img_path 
          FROM products AS pr 
+         LEFT JOIN product_imgs AS primg ON primg.product_id = pr.id 
          LEFT JOIN reviews ON reviews.product_id = pr.id 
          WHERE pr.id = :id";
         $sth = $dbh->prepare($sql);
