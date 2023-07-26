@@ -187,14 +187,7 @@ if(addTobagBtns){
 // localStorage.clear();
 function cartLSadd(value) {
   const storedValues = localStorage.getItem("cart");
-  if (storedValues === null) {
-    localStorage.setItem("cart", JSON.stringify([value]));
-  } 
-  else {
-    const parsedValues = JSON.parse(storedValues);
-    parsedValues.push(value);
-    localStorage.setItem('cart', JSON.stringify(parsedValues));
-  }
+  addtoLS(storedValues, 'cart', value )
 }
 
 // showbag
@@ -318,3 +311,39 @@ if(addReviewBtn){
     addReviewBtn.classList.add('hidden');
   })
 }
+
+const storedFilter = localStorage.getItem("filters");
+// localStorage.clear();
+function rememberFilter(){
+
+  if(filtersCheckboxes){
+    for(let i = 0; i < filtersCheckboxes.length; i++){
+      if(filtersCheckboxes[i].checked){
+        let value = filtersCheckboxes[i].id;
+        value = value.split("-")[0];
+
+        addtoLS(storedFilter, 'filters', value);
+      }
+    }
+
+  }
+
+}
+
+function addtoLS(ls, name, value){
+  if (ls === null) {
+    localStorage.setItem(name, JSON.stringify([value]));
+  }else {
+    const parsedValues = JSON.parse(ls);
+    parsedValues.push(value);
+    localStorage.setItem(name, JSON.stringify(parsedValues));
+  }
+}
+const homelinks = document.querySelectorAll('a[href="?page=home"]');
+homelinks.forEach(link => {
+  link.addEventListener('click', e=>{
+    if(storedFilter){
+      localStorage.removeItem('filters');
+    }
+  })
+})

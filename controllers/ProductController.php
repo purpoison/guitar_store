@@ -8,7 +8,7 @@ class ProductController
         $model = new ProductModel();
         $filter = new FilterModel();
         $total_page = $model->totalPages(LIMIT);
-        $myArray = $model->getProducts(0, 0);
+        // $myArray = $model->getProducts(0, 0);
         // $path = dirname(__DIR__) . '/data/data.json';
         // $model->store($myArray, $path);
         $this->render("home", [

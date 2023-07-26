@@ -64,7 +64,7 @@ function generateFilters($data, $action)
                 </li>
             </ul>";
         }
-        $div .= "</div><button type='submit' class='btn filter-btn'>Show</button> </div>";
+        $div .= "</div><button type='submit' class='btn filter-btn' onclick='rememberFilter()'>Show</button> </div>";
     }
     $div .= "</form>";
     return $div;
